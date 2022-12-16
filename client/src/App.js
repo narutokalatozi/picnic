@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { StyledApp } from "./AppStyles";
+import BarChart from "./components/Bar";
+import { DemoBar } from "./components/BarChart";
 import MoonIcon from "./components/MoonIcon";
-import PieChart from "./components/PieChart";
+import { PieChart } from "./components/MobileDonutChart";
 import SunIcon from "./components/SunIcon";
 import Switch from "./components/Switch";
 import { darkTheme, lightTheme } from "./Themes";
+import { DonutChart } from "./components/WebDonutChart";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -24,12 +27,10 @@ const App = () => {
     fetchData();
   }, []);
 
-  const totalParticipants = data.length;
+  const totalParticipants = data.reduce((sum, person) => person.Count + sum, 0);
   const q1 = data.map((social) => social.Answer);
   const q2 = data.map((type) => type["Segment Type"]);
   const q3 = data.map((type) => type["Segment Description"]);
-
-  console.log(q3);
 
   // Instagram, Facebook, Linkedin, Snapchat
   const instagram = q1.filter((insta) => insta === "Instagram").length;
@@ -38,14 +39,25 @@ const App = () => {
   const snapchat = q1.filter((snapchat) => snapchat === "Snapchat").length;
 
   // Mobile, Web, Gender, University, Custom
-  const mobile = q2.filter((mobile) => mobile === "Mobile").length;
-  const web = q2.filter((web) => web === "Web").length;
-  const gender = q2.filter((gender) => gender === "Gender").length;
-  const university = q2.filter((uni) => uni === "University").length;
-  const custom = q2.filter((custom) => custom === "Custom").length;
+  const mobileParticipants = data
+    .slice(0, 4)
+    .reduce((sum, mobile) => mobile.Count + sum, 0);
 
-  console.log(mobile, web, gender, university, custom);
-  // console.log(data);
+  const webParticipants = data
+    .slice(4, 8)
+    .reduce((sum, web) => web.Count + sum, 0);
+
+  const genderParticipants = data
+    .slice(8, 16)
+    .reduce((sum, gender) => gender.Count + sum, 0);
+  const uniParticipants = data
+    .slice(16, 324)
+    .reduce((sum, uni) => uni.Count + sum, 0);
+  const customParticipants = data
+    .slice(324)
+    .reduce((sum, custom) => custom.Count + sum, 0);
+
+  console.log(data);
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <StyledApp>
@@ -59,12 +71,11 @@ const App = () => {
             snapchat, and linkedin...which do you click first?
           </h2>
         </div>
-        <PieChart
-          instagram={instagram}
-          facebook={facebook}
-          linkedin={linkedin}
-          snapchat={snapchat}
-        />
+        <DemoBar />
+        <PieChart />
+        <DonutChart />
+
+        {/* <BarChart /> */}
       </StyledApp>
     </ThemeProvider>
   );
