@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { StyledApp } from "./AppStyles";
-import BarChart from "./components/Bar";
 import { DemoBar } from "./components/BarChart";
 import MoonIcon from "./components/MoonIcon";
 import { PieChart } from "./components/MobileDonutChart";
@@ -9,6 +8,9 @@ import SunIcon from "./components/SunIcon";
 import Switch from "./components/Switch";
 import { darkTheme, lightTheme } from "./Themes";
 import { DonutChart } from "./components/WebDonutChart";
+import { FemaleDonutChart } from "./components/FemaleDonutChart";
+import { MaleDonutChart } from "./components/MaleDonutChart";
+import UniBarchart from "./components/UniBarChart";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -31,6 +33,8 @@ const App = () => {
   const q1 = data.map((social) => social.Answer);
   const q2 = data.map((type) => type["Segment Type"]);
   const q3 = data.map((type) => type["Segment Description"]);
+
+  const singleUni = [...new Set(q3.slice(16, 324))];
 
   // Instagram, Facebook, Linkedin, Snapchat
   const instagram = q1.filter((insta) => insta === "Instagram").length;
@@ -57,7 +61,6 @@ const App = () => {
     .slice(324)
     .reduce((sum, custom) => custom.Count + sum, 0);
 
-  console.log(data);
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <StyledApp>
@@ -72,10 +75,17 @@ const App = () => {
           </h2>
         </div>
         <DemoBar />
-        <PieChart />
-        <DonutChart />
-
-        {/* <BarChart /> */}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div>
+            <PieChart />
+            <DonutChart />
+          </div>
+          <div>
+            <FemaleDonutChart />
+            <MaleDonutChart />
+          </div>
+        </div>
+        <UniBarchart labels={singleUni} />
       </StyledApp>
     </ThemeProvider>
   );

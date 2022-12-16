@@ -51,6 +51,7 @@ export const PieChart = () => {
           whiteSpace: "pre-wrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
+          fontSize: "1.5rem",
         },
         content: "Mobile respondents",
       },

@@ -1,23 +1,23 @@
 import React from "react";
 import { Pie } from "@ant-design/plots";
 
-export const DonutChart = () => {
+export const MaleDonutChart = () => {
   const data = [
     {
       type: "Instagram",
-      value: 30,
+      value: 1008,
     },
     {
       type: "Facebook",
-      value: 32,
+      value: 565,
     },
     {
       type: "Snapchat",
-      value: 47,
+      value: 2483,
     },
     {
       type: "Linkedin",
-      value: 8,
+      value: 142,
     },
   ];
   const config = {
@@ -53,7 +53,7 @@ export const DonutChart = () => {
           textOverflow: "ellipsis",
           fontSize: "1.5rem",
         },
-        content: "Web-based respondents",
+        content: "Male respondents",
       },
     },
   };
