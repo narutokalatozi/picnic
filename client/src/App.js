@@ -12,6 +12,7 @@ import { FemaleDonutChart } from "./components/FemaleDonutChart";
 import { MaleDonutChart } from "./components/MaleDonutChart";
 import UniBarchart from "./components/UniBarChart";
 import { CustomDonutChart } from "./components/CustomDonutChart";
+import { UniversityBarChart } from "./components/UniversityBarChart";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -37,7 +38,7 @@ const App = () => {
 
   const singleUni = [...new Set(q3.slice(16, 324))];
 
-  console.log(data);
+  // console.log(data);
 
   // Mobile, Web, Gender, University, Custom
   const mobileParticipants = data
@@ -91,6 +92,8 @@ const App = () => {
           </div>
         </div>
         <UniBarchart labels={singleUni} />
+        <Title2>Segment Description: University</Title2>
+        <UniversityBarChart data={data} />
         <Title2>Segment Description: Custom</Title2>
         <CustomDonutChart data={data} />
       </StyledApp>

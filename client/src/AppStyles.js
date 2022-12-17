@@ -19,3 +19,7 @@ export const Title = styled.h1`
 export const Title2 = styled.h2`
   color: ${(props) => props.theme.title};
 `;
+
+export const Space = styled.div`
+  margin: 1rem 0;
+`;

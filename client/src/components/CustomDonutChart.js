@@ -3,7 +3,7 @@ import { Pie } from "@ant-design/plots";
 
 export const CustomDonutChart = ({ data }) => {
   const segmentDesc = [];
-  const [chosenCustom, setCustom] = useState([]);
+  const [selectedCustom, setSelectedCustom] = useState([]);
 
   const filterData = data.filter((item) => item["Segment Type"] === "Custom");
   filterData.forEach((item) => {
@@ -13,7 +13,7 @@ export const CustomDonutChart = ({ data }) => {
   });
 
   const customData = filterData.filter(
-    (item) => item["Segment Description"] === chosenCustom
+    (item) => item["Segment Description"] === selectedCustom
   );
 
   const defaultData = [
@@ -66,15 +66,19 @@ export const CustomDonutChart = ({ data }) => {
           fontSize: "1.5rem",
         },
         // content: "$90K-$240k",
-        content: resultData.length === 0 ? defaultText : chosenCustom,
+        content: resultData.length === 0 ? defaultText : selectedCustom,
       },
     },
   };
   return (
     <div>
-      <select onChange={(e) => setCustom(e.target.value)}>
+      <select onChange={(e) => setSelectedCustom(e.target.value)}>
         {segmentDesc.map((segment) => {
-          return <option value={segment}>{segment}</option>;
+          return (
+            <option key={segment} value={segment}>
+              {segment}
+            </option>
+          );
         })}
       </select>
       <Pie {...config} />
