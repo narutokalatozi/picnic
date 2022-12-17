@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/api");
+      const response = await fetch("https://spongebob-i686.vercel.app/api");
       const data = await response.json();
       return setData(data);
     };
