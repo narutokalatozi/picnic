@@ -58,10 +58,6 @@ const App = () => {
     .slice(324)
     .reduce((sum, custom) => custom.Count + sum, 0);
 
-  const parentsMake = data.slice(324, 328);
-
-  console.log(parentsMake);
-
   const sum = {
     mobileParticipants,
     webParticipants,
@@ -69,16 +65,6 @@ const App = () => {
     uniParticipants,
     customParticipants,
   };
-  const segmentDescriptions = [];
-
-  const fighter = data.filter((item) => item["Segment Type"] === "Custom");
-  fighter.forEach((item) => {
-    if (!segmentDescriptions.includes(item["Segment Description"])) {
-      segmentDescriptions.push(item["Segment Description"]);
-    }
-  });
-
-  console.log(fighter, "Fog");
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
