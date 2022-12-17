@@ -11,7 +11,7 @@ import { DonutChart } from "./components/WebDonutChart";
 import { FemaleDonutChart } from "./components/FemaleDonutChart";
 import { MaleDonutChart } from "./components/MaleDonutChart";
 import UniBarchart from "./components/UniBarChart";
-import { ParentsDonutChart } from "./components/ParentsDonutChart";
+import { CustomDonutChart } from "./components/CustomDonutChart";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -105,8 +105,8 @@ const App = () => {
           </div>
         </div>
         <UniBarchart labels={singleUni} />
-        <Title2>Segment Description: your parents make?</Title2>
-        <ParentsDonutChart />
+        <Title2>Segment Description: Custom</Title2>
+        <CustomDonutChart data={data} />
       </StyledApp>
     </ThemeProvider>
   );
