@@ -12,3 +12,10 @@ export const StyledApp = styled.div`
 export const PieStyled = styled.div`
   width: 250px;
 `;
+
+export const Title = styled.h1`
+  color: ${(props) => props.theme.title};
+`;
+export const Title2 = styled.h2`
+  color: ${(props) => props.theme.title};
+`;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-import { StyledApp } from "./AppStyles";
+import { StyledApp, Title, Title2 } from "./AppStyles";
 import { DemoBar } from "./components/BarChart";
 import MoonIcon from "./components/MoonIcon";
 import { PieChart } from "./components/MobileDonutChart";
@@ -11,6 +11,7 @@ import { DonutChart } from "./components/WebDonutChart";
 import { FemaleDonutChart } from "./components/FemaleDonutChart";
 import { MaleDonutChart } from "./components/MaleDonutChart";
 import UniBarchart from "./components/UniBarChart";
+import { ParentsDonutChart } from "./components/ParentsDonutChart";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -36,11 +37,7 @@ const App = () => {
 
   const singleUni = [...new Set(q3.slice(16, 324))];
 
-  // Instagram, Facebook, Linkedin, Snapchat
-  const instagram = q1.filter((insta) => insta === "Instagram").length;
-  const facebook = q1.filter((facebook) => facebook === "Facebook").length;
-  const linkedin = q1.filter((linkedin) => linkedin === "Linkedin").length;
-  const snapchat = q1.filter((snapchat) => snapchat === "Snapchat").length;
+  console.log(data);
 
   // Mobile, Web, Gender, University, Custom
   const mobileParticipants = data
@@ -61,6 +58,28 @@ const App = () => {
     .slice(324)
     .reduce((sum, custom) => custom.Count + sum, 0);
 
+  const parentsMake = data.slice(324, 328);
+
+  console.log(parentsMake);
+
+  const sum = {
+    mobileParticipants,
+    webParticipants,
+    genderParticipants,
+    uniParticipants,
+    customParticipants,
+  };
+  const segmentDescriptions = [];
+
+  const fighter = data.filter((item) => item["Segment Type"] === "Custom");
+  fighter.forEach((item) => {
+    if (!segmentDescriptions.includes(item["Segment Description"])) {
+      segmentDescriptions.push(item["Segment Description"]);
+    }
+  });
+
+  console.log(fighter, "Fog");
+
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <StyledApp>
@@ -68,13 +87,13 @@ const App = () => {
         <Switch toggleTheme={toggleTheme} isDarkTheme={theme} />
         <MoonIcon />
         <div>
-          <h1>{totalParticipants} Participants</h1>
-          <h2>
-            You open ur phone and have a notif badge on instagram, facebook,
-            snapchat, and linkedin...which do you click first?
-          </h2>
+          <Title>{totalParticipants} Participants</Title>
+          <Title2>
+            Question: You open ur phone and have a notif badge on instagram,
+            facebook, snapchat, and linkedin...which do you click first?
+          </Title2>
         </div>
-        <DemoBar />
+        <DemoBar sum={sum} />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div>
             <PieChart />
@@ -86,6 +105,8 @@ const App = () => {
           </div>
         </div>
         <UniBarchart labels={singleUni} />
+        <Title2>Segment Description: your parents make?</Title2>
+        <ParentsDonutChart />
       </StyledApp>
     </ThemeProvider>
   );

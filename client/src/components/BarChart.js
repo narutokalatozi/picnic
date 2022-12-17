@@ -1,26 +1,26 @@
 import { Bar } from "@ant-design/plots";
 
-export const DemoBar = () => {
+export const DemoBar = ({ sum }) => {
   const data = [
     {
       year: "Mobile",
-      value: 9373,
+      value: sum.mobileParticipants,
     },
     {
       year: "Web",
-      value: 117,
+      value: sum.webParticipants,
     },
     {
       year: "Gender",
-      value: 9458,
+      value: sum.genderParticipants,
     },
     {
       year: "University",
-      value: 1948,
+      value: sum.uniParticipants,
     },
     {
       year: "Custom",
-      value: 17111,
+      value: sum.customParticipants,
     },
   ];
   const config = {
